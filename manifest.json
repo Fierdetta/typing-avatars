@@ -1,0 +1,14 @@
+{
+    "name": "Typing Avatars",
+    "description": "Replaces the typing indicator with the avatars of those who are typing.",
+    "authors": [
+        {
+            "name": "Fiery",
+            "id": "890228870559698955"
+        }
+    ],
+    "main": "src/index.tsx",
+    "vendetta": {
+        "icon": "ic_feedback"
+    }
+}
