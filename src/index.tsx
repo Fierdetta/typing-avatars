@@ -1,7 +1,7 @@
 import { findByProps } from "@vendetta/metro";
 import { React } from "@vendetta/metro/common";
 import { after } from "@vendetta/patcher";
-import TypingAvatars from "./components/TypingAvatars";
+import TypingAvatars from "./ui/components/TypingAvatars";
 
 const TypingWrapper = findByProps("TYPING_WRAPPER_HEIGHT");
 
