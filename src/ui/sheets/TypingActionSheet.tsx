@@ -36,6 +36,21 @@ const styles = StyleSheet.createThemedStyleSheet({
     }
 });
 
+const channelType = {
+    "0": "channel",
+    "1": "dm",
+    "2": "channel",
+    "3": "dm",
+    // skipped GUILD_CATEGORY
+    "5": "channel",
+    "6": "channel",
+    "10": "thread",
+    "11": "thread",
+    "12": "thread",
+    "13": "channel"
+    // skipped GUILD_DIRECTORY
+    // skipped GUILD_FORUM
+};
 
 function TypingActionSheet({ channel }) {
     const typingIds = useTypingUserIds(channel.id);
@@ -44,11 +59,11 @@ function TypingActionSheet({ channel }) {
 
     return (<ActionSheet scrollable>
         <BottomSheetScrollView contentContainerStyle={{ paddingBottom: 16 }}>
-            <ActionSheetTitleHeader title={`Users typing in ${channel.type ? "" : "#"}${channel.name}`} />
+            <ActionSheetTitleHeader title={`Users typing in ${channelType[channel.type] === "channel" ? "#" : ""}${channel.name}`} />
             {typingUsers.length !== 0 ? typingUsers.map((user) =>
                 <FormRow
                     leading={<Avatar user={user} size="normal" guildId={channel.guild_id} />}
-                    label={channel.type ? RelationshipStore.getNickname(user.id) : GuildMemberStore.getNick(channel.guild_id, user.id) ?? user.username}
+                    label={(channelType[channel.type] === "dm" ? RelationshipStore.getNickname(user.id) : GuildMemberStore.getNick(channel.guild_id, user.id)) ?? user.username}
                     trailing={<FormArrow />}
                     onPress={() => showUserProfile({ userId: user.id, channelId: channel.id })}
                 />
@@ -57,7 +72,7 @@ function TypingActionSheet({ channel }) {
                     source={getAssetIDByName(ThemeStore.theme === "light" ? "empty_channel_no_text_channels_light" : "empty_channel_no_text_channels_dark")}
                     style={{ width: 256, height: 128, resizeMode: "contain" }}
                 />
-                <Text style={styles.text}>Nobody is typing in this {channel.type ? "DM" : "channel"} right now.</Text>
+                <Text style={styles.text}>Nobody is typing in this {channelType[channel.type] === "dm" ? channelType[channel.type].toUpperCase() : channelType[channel.type]} right now.</Text>
             </View>}
         </BottomSheetScrollView>
     </ActionSheet>)
