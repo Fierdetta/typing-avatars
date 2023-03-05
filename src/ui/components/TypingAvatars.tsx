@@ -1,9 +1,12 @@
 import { findByDisplayName, findByProps, findByStoreName } from "@vendetta/metro";
 import { stylesheet as StyleSheet } from "@vendetta/metro/common";
 import { semanticColors } from "@vendetta/ui";
+import { General } from "@vendetta/ui/components";
 import { unfreeze } from "@vendetta/utils";
+import { showTypingActionSheet } from "../sheets/TypingActionSheet";
 import OverflowAvatar from "./OverflowAvatar";
 
+const { Pressable } = General;
 const { default: SummarizedIconRow } = findByDisplayName("SummarizedIconRow", false);
 const { type: Avatar } = findByProps("AvatarSizes").default;
 
@@ -40,17 +43,21 @@ export default function TypingAvatars({ channel }) {
 		return <Avatar user={user} size="size12" guildId={channel.guild_id} />
 	};
 
-	return (<SummarizedIconRow
-		iconWrapperStyle={styles.wrapper}
-		items={typingUsers}
-		max={5}
-		offsetAmount={-8}
-		overflowComponent={OverflowAvatar}
-		overflowStyle={styles.wrapper}
-		style={{
-			height: 16,
-			paddingRight: 2
-		}}
-		renderItem={renderAvatar}
-	/>);
+	return (
+		<Pressable onPress={() => showTypingActionSheet(channel)}>
+			<SummarizedIconRow
+				iconWrapperStyle={styles.wrapper}
+				items={typingUsers}
+				max={5}
+				offsetAmount={-8}
+				overflowComponent={OverflowAvatar}
+				overflowStyle={styles.wrapper}
+				style={{
+					height: 16,
+					paddingRight: 2
+				}}
+				renderItem={renderAvatar}
+			/>
+		</Pressable>
+	);
 };
