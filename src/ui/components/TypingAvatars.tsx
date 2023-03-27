@@ -1,4 +1,4 @@
-import { findByDisplayName, findByProps, findByStoreName } from "@vendetta/metro";
+import { findByName, findByProps, findByStoreName } from "@vendetta/metro";
 import { stylesheet as StyleSheet } from "@vendetta/metro/common";
 import { semanticColors } from "@vendetta/ui";
 import { General } from "@vendetta/ui/components";
@@ -7,7 +7,7 @@ import { showTypingActionSheet } from "../sheets/TypingActionSheet";
 import OverflowAvatar from "./OverflowAvatar";
 
 const { Pressable } = General;
-const { default: SummarizedIconRow } = findByDisplayName("SummarizedIconRow", false);
+const { default: SummarizedIconRow } = findByName("SummarizedIconRow", false);
 const { type: Avatar } = findByProps("AvatarSizes").default;
 
 const { useTypingUserIds } = findByProps("TYPING_WRAPPER_HEIGHT");
