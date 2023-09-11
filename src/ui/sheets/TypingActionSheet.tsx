@@ -8,7 +8,7 @@ const LazyActionSheet = findByProps("openLazy", "hideActionSheet");
 
 const { FormRow, FormArrow } = Forms;
 const { View, Image, Text } = General;
-const ActionSheet = find((m) => m.default?.render?.name === "ActionSheet").default.render;
+const ActionSheet = findByProps("ActionSheet")?.ActionSheet ?? find((m) => m.render?.name === "ActionSheet");
 const { BottomSheetScrollView } = findByProps("BottomSheetScrollView");
 const { ActionSheetTitleHeader } = findByProps("ActionSheetTitleHeader");
 const { type: Avatar } = findByProps("AvatarSizes").default;
